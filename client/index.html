@@ -44,26 +44,34 @@
 
       // SLIDE SHOW
 
-        var carousel = document.querySelector('.carousel');
-        var flkty = new Flickity( carousel, {
-          imagesLoaded: true,
-          percentPosition: false,
-        });
+        // var carousel = document.querySelector('.carousel');
+        // var flkty = new Flickity( carousel, {
+        //   imagesLoaded: true,
+        //   percentPosition: false,
+        // });
 
-        var imgs = carousel.querySelectorAll('.carousel-cell img');
+        // var imgs = carousel.querySelectorAll('.carousel-cell img');
         // get transform property
-        var docStyle = document.documentElement.style;
-        var transformProp = typeof docStyle.transform == 'string' ?
-          'transform' : 'WebkitTransform';
+        // var docStyle = document.documentElement.style;
+        // var transformProp = typeof docStyle.transform == 'string' ?
+        //   'transform' : 'WebkitTransform';
+        //
+        // if(flkty){
+        //   flkty.on( 'scroll', function() {
+        //     flkty.slides.forEach( function( slide, i ) {
+        //       // var img = imgs[i];
+        //       var x = ( slide.target + flkty.x ) * -1/3;
+        //       img.style[ transformProp ] = 'translateX(' + x  + 'px)';
+        //     });
+        //   });
+        // }
 
-        flkty.on( 'scroll', function() {
-          flkty.slides.forEach( function( slide, i ) {
-            var img = imgs[i];
-            var x = ( slide.target + flkty.x ) * -1/3;
-            img.style[ transformProp ] = 'translateX(' + x  + 'px)';
-          });
-        });
     </script>
+    <style media="screen">
+      .small {
+        width: 100px;
+      }
+    </style>
   </head>
   <body>
     <div id="ecommerce">
@@ -326,6 +334,7 @@
                                 <tr>
                                   <td>No</td>
                                   <th>Jumlah</th>
+                                  <th>Gambar</th>
                                   <th>Barang</th>
                                   <th>Harga</th>
                                   <th>Hapus</th>
@@ -335,6 +344,7 @@
                                 <tr v-for="(transaction, i) in transactions">
                                   <td>{{ i + 1 }}</td>
                                   <td>{{ transaction.amount }}</td>
+                                  <td><img class="small" v-bind:src="transaction.picture" alt="product"></td>
                                   <th>{{ transaction.products_name }}</th>
                                   <td>{{ transaction.amount * transaction.prices }}</td>
                                   <td><i v-on:click.prevent="removeItem(transaction._id)" class="fa fa-trash-o" aria-hidden="true"></i></td>
@@ -440,6 +450,7 @@
               if(trans._id == id){
                 this.transactions.splice(i, 1);
                 this.total -= trans.prices * trans.amount
+                this.cart -= trans.amount
               }
             })
           }
