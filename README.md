@@ -25,6 +25,5 @@ $ npm run dev
 
 for CLIENT
 $ cd client
-$ npm install
-$ npm run dev
+$ live-server (using npm for installing liver-server global )
 ```
