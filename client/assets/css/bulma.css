@@ -2803,12 +2803,11 @@ a.box:active {
   position: relative;
   vertical-align: top;
   background-color: white;
-  border-color: #dbdbdb;
   color: #363636;
   -webkit-box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
           box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
   max-width: 100%;
-  width: 100%;
+  width: 500px;
 }
 
 .input:focus, .input.is-focused, .input:active, .input.is-active,
@@ -2850,7 +2849,7 @@ a.box:active {
   border-color: #b5b5b5;
 }
 
-.input:focus, .input.is-focused, .input:active, .input.is-active,
+.input.is-focused, .input.is-active,
 .textarea:focus,
 .textarea.is-focused,
 .textarea:active,
@@ -10675,7 +10674,6 @@ label.panel-block:hover {
 .footer {
   background-color: #f6b75d;
   margin: 0;
-  position: absolute;
   right: 0;
   bottom: 0;
   left: 0;
@@ -10690,14 +10688,26 @@ label.panel-block:hover {
   background: #fcf4d9;
 }
 
+/*.carousel-cell {
+  width: 100%;
+  height: 400px;
+  margin: 0px;
+  counter-increment: gallery-cell;
+}*/
 .carousel-cell {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 400px;
   margin: 0px;
   counter-increment: gallery-cell;
 }
-.carousel-cell {
-  overflow: hidden;
+.carousel-cell img{
+  flex-shrink: 0;
+    min-width: 100%;
+    min-height: 100%
 }
 /* cell number */
 /*.carousel-cell:before {

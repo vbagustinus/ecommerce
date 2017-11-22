@@ -1,4 +1,4 @@
-const mongoose = require('mongoose').connect('mongodb://localhost:27017/ecommerce');
+const mongoose = require('mongoose').connect('mongodb://vbagustinus:anakjalanan@smartshop-shard-00-00-hibsb.mongodb.net:27017,smartshop-shard-00-01-hibsb.mongodb.net:27017,smartshop-shard-00-02-hibsb.mongodb.net:27017/ecommerce?ssl=true&replicaSet=smartshop-shard-0&authSource=admin');
 const ObjectId = require('mongodb').ObjectID;
 const Product = require('../models/productModel');
 const multer = require('multer');
@@ -21,17 +21,25 @@ let getAllProducts = (req, res) => {
   })
   .catch(err => {
     res.status(500).send(err);
-  })  
+  })
 }
 
 let createProduct = (req, res) => {
   console.log('MASUK', req.body);
   // upload(req,res,function(err) {})
   let input = req.body
+  let random = Math.floor(Math.random() * 7) + 1;
+  let dummyImages  = ["https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_2_front.jpg",
+  "https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_5_front.jpg",
+  "https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_3_front.jpg",
+  "https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_4_front.jpg",
+  "https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_1_front.jpg",
+  "https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_2_front.jpg",
+  "https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_7_front.jpg"]
   let inputProduct =
   {
     products_name: input.products_name,
-    picture: "assets/images/service.jpg",
+    picture: dummyImages[random],
     prices: input.prices,
     details: input.details,
     category: input.category,
