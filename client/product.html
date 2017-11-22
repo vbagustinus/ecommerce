@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Input Products</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Muli|Quicksand|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/bulma.css" type="text/css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+  </head>
+  <body>
+    <div id="products">
+      <section class="hero is-medium is-primary is-bold">
+        <div class="hero-body">
+          <div class="container">
+            <form v-on:submit.prevent="saveProduct" id="uploadForm" enctype="multipart/form-data" >
+              <div class="field is-horizontal">
+                <div class="field-body">
+                  <div class="field">
+                    <div class="control">
+                      <input class="input" type='text' v-model="products_name" name='products_name' placeholder="Products Name"><br><br>
+                      <div class="field">
+                        <div class="file is-warning">
+                          <label class="file-label">
+                            <input class="file-input" type="file" name="image">
+                            <span class="file-cta">
+                              <span class="file-icon">
+                                <i class="fa fa-upload"></i>
+                              </span>
+                              <span class="file-label">
+                                Choose Image
+                              </span>
+                            </span>
+                          </label>
+                        </div><br><br>
+                            <textarea type='text' v-model="details" name='details' class="textarea" placeholder="Explain products"></textarea><br>
+                            <input class="input" type='text' v-model="category" name='category' placeholder="Category Name"/><br><br>
+                            <input class="input" type='text' v-model="prices" name='prices' placeholder="Prices"/><br><br>
+                            <input class="input" type='text' v-model="stocks" name='stocks'placeholder="Stocks"/><br><br>
+                            <input class="button is-warning" type="submit" value="Upload Product" name="submit"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <span id = "status"></span>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+    <script>
+      new Vue(
+      {
+        el: '#products',
+        data: {
+          products_name: '',
+          details: '',
+          category: '',
+          prices: 0,
+          stocks: 0
+        },
+        methods: {
+          saveProduct(data) {
+            console.log('MASUK SINI', data);
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
