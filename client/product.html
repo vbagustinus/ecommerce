@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8">
     <title>Input Products</title>
-
     <link href="https://fonts.googleapis.com/css?family=Muli|Quicksand|Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/bulma.css" type="text/css">
@@ -92,7 +91,7 @@
         <div class="modal-mask">
           <div class="modal-wrapper">
             <div class="modal-container">
-              <form class='login-form' @submit='checkLogin'>
+              <form class='login-form' @submit.prevent='checklogin'>
                 <div class="flex-row">
                   <label class="lf--label" for="username">
                     <svg x="0px" y="0px" width="12px" height="13px">
@@ -119,8 +118,10 @@
       </transition>
     </script>
     <div id="products">
-        <login-page v-if="showModal" @close="showModal = false"/>
-      <div class="tile is-ancestor">
+      <div v-if="status">
+          <login-page v-if="showModal" @login="loginadmin"/>
+      </div>       
+      <div v-else class="tile is-ancestor">
         <div class="tile is-vertical is-7">
           <div class="tile is-parent">
             <article class="tile is-child notification is-info">
@@ -153,7 +154,8 @@
             </article>
           </div>
         </div>
-        <input-product @loginAdmin="loginadmin"/>
+            <input-product @savedata="productsave"/>
+       
       </div>
     </div>
     <!-- ================================== -->
@@ -167,8 +169,8 @@
           }
         },
         methods: {
-          checkLogin () {
-            this.$emit('loginAdmin', {
+          checklogin () {
+            this.$emit('login', {
               username: this.username,
               password: this.password
             })
@@ -180,7 +182,7 @@
         template : `
         <div class="tile is-parent">
           <article class="tile is-child notification is-light">
-            <form @submit.prevent="saveProduct" id="products">
+            <form @submit.prevent="saveproduct" id="products">
               <div class="field is-horizontal">
                 <div class="field-body">
                   <div class="field">
@@ -213,8 +215,14 @@
           }
         },
         methods : {
-          saveProduct(){
-            console.log();
+          saveproduct(){
+            this.$emit('savedata', {
+              products_name: this.form.products_name,
+              details: this.form.details,
+              category: this.form.category,
+              prices: this.form.prices,
+              stocks: this.form.stocks
+            })
           }
         },
 
@@ -224,20 +232,34 @@
         el: '#products',
         data: {
           products : [],
-          showModal: false
+          showModal: false,
+          status: false
         },
         methods: {
-          saveProduct () {
-            console.log('MASUK SINI', this.form.products_name);
+          productsave (data) {
+            axios.post('http://localhost:3000/products', data)
+            .then(({data}) => {
+              console.log('setalah save product', data)
+            })
+            .catch(err => {
+              console.log(err)
+            })
           },
           loginadmin (data) {
-            console.log(data)
+            axios.post('http://localhost:3000/login', data)
+            .then(({data}) => {
+              console.log('setalah login', data)
+            })
+            .catch(err => {
+              console.log(err)
+            })
           }
         },
         created (){
           let session = localStorage.getItem('token')
           if(!session) {
             this.showModal = true
+            this.status =  true
           }
           axios.get('http://localhost:3000/products')
           .then(response => {
