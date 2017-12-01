@@ -17,7 +17,7 @@ router.post('/', (req, res, next) => {
     next();
   });
 }, images.sendUploadToGCS, (req, res, next) => {
-  console.log('INI REQ', req)
+  // console.log('INI REQ', req)
   Product.createProduct(req, res, next)
 });
 router.delete('/:id', Product.deleteProduct);

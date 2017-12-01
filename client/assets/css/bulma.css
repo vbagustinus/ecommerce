@@ -4545,6 +4545,7 @@ a.box:active {
 .notification.is-info {
   background-color: #f6b75c;
   color: #fff;
+  text-align: -webkit-center;
 }
 
 .notification.is-success {
@@ -10743,14 +10744,15 @@ label.panel-block:hover {
 }
 .wadah {
   border : #ddd 0.5px solid;
-  padding: 10px;
-  background-color: #fff;
+  margin:0;
+  padding: 15px;
   -webkit-box-shadow: rgba(0, 0, 0,0) 0 1px 1px;
 }
 .wadah:hover {
   border : #000 0.5px solid;
   padding: 10px;
   background-color: #fff;
+  color:#000;
   -webkit-box-shadow: rgba(0, 0, 0,0) 0 1px 1px;
 }
 .flex-container {

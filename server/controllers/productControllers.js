@@ -15,64 +15,30 @@ let getAllProducts = (req, res) => {
 
 let createProduct = (req, res) => {
   let input = req.body
-  console.log(input.products_name);
-  console.log(input.prices);
-  console.log(input.details);
-  console.log(input.category);
-  console.log(input.stocks);
-  console.log('URL PENTING',req.file.cloudStoragePublicUrl);
-  // products_name: String,
-  // picture: String,
-  // prices: Number,
-  // details: String,
-  // category: String,
-  // stocks: Number
-  // let inputObj = Images({
-  //   name: req.body.name,
-  //   url: req.file.cloudStoragePublicUrl,
-  //   longitude: req.body.longitude,
-  //   latitude: req.body.latitude,
-  // })
-  //  inputObj.save()
-  //  .then( data => {
-  //    res.send({
-  //      msg: 'Data Tersimpan',
-  //      data: data
-  //    })
-  //  })
-  //  .catch( err=> {
-  //    console.log(err);
-  //  })
-  // upload(req,res,function(err) {})
-  // let input = req.body
-  // let random = Math.floor(Math.random() * 7) + 1;
-  // let dummyImages  = ["https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_2_front.jpg",
-  // "https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_5_front.jpg",
-  // "https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_3_front.jpg",
-  // "https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_4_front.jpg",
-  // "https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/hoodie_1_front.jpg",
-  // "https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_2_front.jpg",
-  // "https://demo.woothemes.com/woocommerce/wp-content/uploads/sites/56/2013/06/T_7_front.jpg"]
-  // let inputProduct =
-  // {
-  //   products_name: input.products_name,
-  //   picture: dummyImages[random],
-  //   prices: input.prices,
-  //   details: input.details,
-  //   category: input.category,
-  //   stocks: input.stocks
-  // };
-  // //save Product
-  // Product.create(inputProduct)
-  // .then(ProductSaved => {
-  //   res.send({
-  //     Product: ProductSaved,
-  //     messages : 'Input successed'
-  //   })
-  // })
-  // .catch(err => {
-  //   res.status(500).send('Failed to Save Products')
-  // })
+  // console.log('NAMA PRODUCT', input.products_name);
+  // console.log(input.prices);
+  // console.log(input.details);
+  // console.log(input.category);
+  // console.log(input.stocks);
+  // console.log('URL PENTING',req.file.cloudStoragePublicUrl);
+  let inputObj = {
+    products_name: input.products_name,
+    picture: req.file.cloudStoragePublicUrl,
+    details: input.details,
+    category: input.category,
+    prices: input.prices,
+    stocks: input.stocks
+  }
+  Product.create(inputObj)
+  .then(data => {
+    res.send({
+      msg: 'Data Tersimpan',
+      data: data
+    })
+  })
+  .catch(err => {
+    console.log(err);
+  })
 }
 
 let deleteProduct = (req, res) => {
