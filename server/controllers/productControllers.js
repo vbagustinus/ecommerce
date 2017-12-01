@@ -1,19 +1,7 @@
-// const mongoose = require('mongoose').connect('mongodb://vbagustinus:anakjalanan@smartshop-shard-00-00-hibsb.mongodb.net:27017,smartshop-shard-00-01-hibsb.mongodb.net:27017,smartshop-shard-00-02-hibsb.mongodb.net:27017/ecommerce?ssl=true&replicaSet=smartshop-shard-0&authSource=admin');
-const mongoose = require('mongoose').connect('mongodb://localhost:27017/ecommerce');
+const mongoose = require('mongoose').connect('mongodb://vbagustinus:anakjalanan@smartshop-shard-00-00-hibsb.mongodb.net:27017,smartshop-shard-00-01-hibsb.mongodb.net:27017,smartshop-shard-00-02-hibsb.mongodb.net:27017/ecommerce?ssl=true&replicaSet=smartshop-shard-0&authSource=admin');
+// const mongoose = require('mongoose').connect('mongodb://localhost:27017/ecommerce');
 const ObjectId = require('mongodb').ObjectID;
 const Product = require('../models/productModel');
-const multer = require('multer');
-
-let storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, '../public')
-  },
-  filename: function (req, file, cb) {
-      cb(null, file.fieldname+(Math.random() * 100).toFixed(4) + 1+'.jpg')
-  }
-})
-
-let upload = multer({ storage: storage }).single('imageProduct')
 
 let getAllProducts = (req, res) => {
   Product.find()
@@ -26,7 +14,35 @@ let getAllProducts = (req, res) => {
 }
 
 let createProduct = (req, res) => {
-  console.log('MASUK', req.body);
+  let input = req.body
+  console.log(input.products_name);
+  console.log(input.prices);
+  console.log(input.details);
+  console.log(input.category);
+  console.log(input.stocks);
+  console.log('URL PENTING',req.file.cloudStoragePublicUrl);
+  // products_name: String,
+  // picture: String,
+  // prices: Number,
+  // details: String,
+  // category: String,
+  // stocks: Number
+  // let inputObj = Images({
+  //   name: req.body.name,
+  //   url: req.file.cloudStoragePublicUrl,
+  //   longitude: req.body.longitude,
+  //   latitude: req.body.latitude,
+  // })
+  //  inputObj.save()
+  //  .then( data => {
+  //    res.send({
+  //      msg: 'Data Tersimpan',
+  //      data: data
+  //    })
+  //  })
+  //  .catch( err=> {
+  //    console.log(err);
+  //  })
   // upload(req,res,function(err) {})
   // let input = req.body
   // let random = Math.floor(Math.random() * 7) + 1;

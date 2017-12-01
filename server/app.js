@@ -4,7 +4,7 @@ const bodyParser = require('body-parser')
 const logger = require('morgan');
 const index = require('./routes/index');
 const login = require('./routes/login');
-const register = require('./routes/register');
+// const register = require('./routes/admin');
 const products = require('./routes/products');
 const customers = require('./routes/customers');
 const transactions = require('./routes/transactions');
@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //route
 app.use('/login', login);
-app.use('/register', register);
+// app.use('/register', register);
 app.use('/', index);
 app.use('/products', products);
 app.use('/customers', customers);

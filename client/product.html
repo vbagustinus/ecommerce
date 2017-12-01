@@ -155,7 +155,6 @@
           </div>
         </div>
             <input-product @savedata="productsave"/>
-       
       </div>
     </div>
     <!-- ================================== -->
@@ -182,24 +181,50 @@
         template : `
         <div class="tile is-parent">
           <article class="tile is-child notification is-light">
-            <form @submit.prevent="saveproduct" id="products">
-              <div class="field is-horizontal">
-                <div class="field-body">
-                  <div class="field">
-                    <div class="control">
-                      <div class="field">
-                        <input class="input" type='text' v-model="form.products_name" name='products_name' placeholder="Products Name"><br><br>
-                        <textarea type='text' v-model="form.details" name='details' class="textarea" placeholder="Explain products"></textarea><br>
-                        <input class="input" type='text' v-model="form.category" name='category' placeholder="Category Name"/><br><br>
-                        <input class="input" type='text' v-model="form.prices" name='prices' placeholder="Prices"/><br><br>
-                        <input class="input" type='text' v-model="form.stocks" name='stocks'placeholder="Stocks"/><br><br>
-                        <input class="button is-warning" type="submit" value="Upload Product" name="submit"/>
+              <form v-on:submit.prevent="saveproduct">
+                <div class="field is-horizontal">
+                  <div class="field-body">
+                    <div class="field">
+                      <div class="control">
+                        <div class="field">
+                          <label class="label">Product Name</label>
+                          <input class="input" type='text' v-model="form.products_name" name='products_name' placeholder="Products Name"><br><br>
+                          <label class="label">Descriptions</label>
+                          <textarea type='text' v-model="form.details" name='details' class="textarea" placeholder="Explain products"></textarea><br>
+                          <label class="label">Category Name</label>
+                          <input class="input" type='text' v-model="form.category" name='category' placeholder="Category Name"/><br><br>
+                          <label class="label">Princes</label>
+                          <input class="input" type='text' v-model="form.prices" name='prices' placeholder="Prices"/><br><br>
+                          <label class="label">Stocks</label>
+                          <input class="input" type='text' v-model="form.stocks" name='stocks'placeholder="Stocks"/><br><br>
+                          <div v-if="!image">
+                            <label class="label">Select image</label>
+                            <div class="file is-warning">
+                              <label class="file-label">
+                                <input class="file-input" name="file" id="file" type="file" @change="onFileChange">
+                                <span class="file-cta">
+                                  <span class="file-icon">
+                                    <i class="fa fa-upload"></i>
+                                  </span>
+                                  <span class="file-label">
+                                    Choose file…
+                                  </span>
+                                </span>
+                              </label>
+                            </div>
+                            <br/>
+                          </div>
+                          <div v-else>
+                            <img class="small":src="image" />
+                          </div>
+                          <input class="button is-warning" type="submit" value="Upload Product" name="submit"/>
+                          <button class="button is-light" @click="removeImage">Reset</button>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </form>
+              </form>
           </article>
         </div>
         `,
@@ -209,23 +234,54 @@
               products_name: '',
               details: '',
               category: '',
-              prices: 0,
-              stocks: 0
-            }
+              prices: null,
+              stocks: null
+            },
+            image: '',
+            resultUpload: null
           }
         },
         methods : {
+          removeImage(){
+            this.image = '';
+            this.form.products_name = '';
+            this.form.details = '';
+            this.form.category = '';
+            this.form.prices = '';
+            this.form.stocks = '';
+          },
+          onFileChange(e) {
+            // alert(JSON.stringify(e))
+          console.log(e.target.files)
+          var files = e.target.files || e.dataTransfer.files;
+
+          if (!files.length) {
+            return;
+          }
+          this.resultUpload = files[0]
+          var image = new Image();
+          var reader = new FileReader();
+          var vm = this;
+
+          reader.onload = (e) => {
+            vm.image = e.target.result;
+          };
+          // reader.readAsDataURL(file);
+          reader.readAsDataURL(this.resultUpload);
+          // this.createImage(files[0]);
+          },
           saveproduct(){
-            this.$emit('savedata', {
-              products_name: this.form.products_name,
-              details: this.form.details,
-              category: this.form.category,
-              prices: this.form.prices,
-              stocks: this.form.stocks
-            })
+            let data = new FormData();
+            data.append('product_name', this.form.products_name);
+            data.append('image', this.resultUpload);
+            data.append('details', this.form.details);
+            data.append('category', this.form.category);
+            data.append('prices', this.form.prices);
+            data.append('stocks', this.form.stocks);
+            console.log('DI EMIT', data)
+            this.$emit('savedata', data)
           }
         },
-
       })
       new Vue(
       {
@@ -237,11 +293,18 @@
         },
         methods: {
           productsave (data) {
+            let session = localStorage.getItem('token')
+            if(!session) {
+              this.showModal = true
+              this.status =  true
+            }
+            console.log('kesini ga', data)
             axios.post('http://localhost:3000/products', data)
-            .then(({data}) => {
+            .then((data) => {
               console.log('setalah save product', data)
             })
             .catch(err => {
+              console.log('APA KENA ERROR')
               console.log(err)
             })
           },
@@ -249,6 +312,11 @@
             axios.post('http://localhost:3000/login', data)
             .then(({data}) => {
               console.log('setalah login', data)
+              localStorage.setItem('token', data.token)
+              localStorage.setItem('name', data.name)
+              alert(data.msg)
+              this.showModal = false
+              this.status =  false
             })
             .catch(err => {
               console.log(err)
