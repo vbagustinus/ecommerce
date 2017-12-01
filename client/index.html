@@ -383,7 +383,7 @@
             })
             console.log('INI TRANSAKSI ID', ObjId);
             // axios.post('http://api.smartshopp.ga/transactions',{
-              axios.post('http://localhost:3000/transactions',{
+              axios.post('http://api.smartshopp.ga/transactions',{
               id: ObjId,
               total: this.total
             })
@@ -436,7 +436,7 @@
         },
         created(){
           // axios.get('http://api.smartshopp.ga/products')
-          axios.get('http://localhost:3000/products')
+          axios.get('http://api.smartshopp.ga/products')
           .then(dataProducts => {
             this.products.push(...dataProducts.data)
           })
