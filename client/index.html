@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/bulma.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/bootstrap.css" type="text/css">
-    <script src="/assets/js/flicky.js"></script>
+    <script src="assets/js/flicky.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -71,321 +71,297 @@
       .small {
         width: 100px;
       }
+      .columns {
+        padding: 30px;
+      }
     </style>
   </head>
   <body>
-    <div id="ecommerce">
-      <!-- NAVIGATION BAR -->
-      <nav class="navbar warnaSendiri">
-      <div class="navbar-brand">
-        <div class="navbar-item" >
-          <i class="fa fa-opencart fa-2x" aria-hidden="true"> </i>
-           <strong> SmartShop</strong>
-          <!-- <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28"> -->
-        </div>
-        <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-
-      <div id="navbarExampleTransparentExample" class="navbar-menu">
-        <div class="navbar-start">
-          <!-- ------------------------------------------- -->
-          <div class="navbar-item has-dropdown is-hoverable is-mega">
-            <div class="navbar-link">
-              Categories
+      <div id="ecommerce">
+          <!-- NAVIGATION BAR -->
+          <nav class="navbar warnaSendiri">
+          <div class="navbar-brand">
+            <div class="navbar-item" >
+              <i class="fa fa-opencart fa-2x" aria-hidden="true"> </i>
+               <strong> SmartShop</strong>
+              <!-- <img src="https://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28"> -->
             </div>
-            <div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">
-              <div class="container is-fluid">
-                <div class="columns">
-                  <div class="column">
-                    <h1 class="title is-6 is-mega-menu-title">Men</h1>
-                    <a class="navbar-item " href="#">
-                      Clothes
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Pants
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Shoes
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Slippers
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Shirt
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Hats
-                    </a>
+            <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+    
+          <div id="navbarExampleTransparentExample" class="navbar-menu">
+            <div class="navbar-start">
+              <!-- ------------------------------------------- -->
+              <div class="navbar-item has-dropdown is-hoverable is-mega">
+                <div class="navbar-link">
+                  Categories
+                </div>
+                <div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">
+                  <div class="container is-fluid">
+                    <div class="columns">
+                      <div class="column">
+                        <h1 class="title is-6 is-mega-menu-title">Men</h1>
+                        <a class="navbar-item " href="#">
+                          Clothes
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Pants
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Shoes
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Slippers
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Shirt
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Hats
+                        </a>
+                      </div>
+                      <div class="column">
+                        <h1 class="title is-6 is-mega-menu-title">Woman</h1>
+                        <a class="navbar-item " href="#">
+                          Clothes
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Pants
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Shoes
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Slippers
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Shirt
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Hats
+                        </a>
+                      </div>
+                      <div class="column">
+                        <h1 class="title is-6 is-mega-menu-title">Child</h1>
+                        <a class="navbar-item " href="#">
+                          Clothes
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Pants
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Shoes
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Slippers
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Shirt
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Hats
+                        </a>
+                      </div>
+                      <div class="column">
+                        <h1 class="title is-6 is-mega-menu-title">Baby</h1>
+                        <a class="navbar-item " href="#">
+                          Pants
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Shoes
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Slippers
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Shirt
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Hats
+                        </a>
+                      </div>
+                      <div class="column">
+                        <h1 class="title is-6 is-mega-menu-title">Animal</h1>
+                        <a class="navbar-item " href="#">
+                          Pants
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Shoes
+                        </a>
+                        <a class="navbar-item " href="#">
+                          Hats
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                  <div class="column">
-                    <h1 class="title is-6 is-mega-menu-title">Woman</h1>
-                    <a class="navbar-item " href="#">
-                      Clothes
+                </div>
+              </div>
+              <!-- _______________________________ -->
+            </div>
+            <div class="navbar-item">
+              <div class="field is-grouped">
+                <p class="control is-expanded">
+                  <input class="input" type="text" placeholder="search something">
+                </p>
+                <p class="control">
+                  <a class="button is-warning">
+                    Search
+                  </a>
+                </p>
+              </div>
+            </div>
+            <div class="navbar-end">
+              <div class="navbar-item">
+                <div class="field is-grouped">
+                  <p class="control">
+                    <a class="button is-warning toggle-modal">
+                      <span class="icon">
+                        <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                      </span>
+                      <span class="badge1" v-bind:data-badge="cart">Cart</span>
                     </a>
-                    <a class="navbar-item " href="#">
-                      Pants
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Shoes
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Slippers
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Shirt
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Hats
-                    </a>
-                  </div>
-                  <div class="column">
-                    <h1 class="title is-6 is-mega-menu-title">Child</h1>
-                    <a class="navbar-item " href="#">
-                      Clothes
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Pants
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Shoes
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Slippers
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Shirt
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Hats
-                    </a>
-                  </div>
-                  <div class="column">
-                    <h1 class="title is-6 is-mega-menu-title">Baby</h1>
-                    <a class="navbar-item " href="#">
-                      Pants
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Shoes
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Slippers
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Shirt
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Hats
-                    </a>
-                  </div>
-                  <div class="column">
-                    <h1 class="title is-6 is-mega-menu-title">Animal</h1>
-                    <a class="navbar-item " href="#">
-                      Pants
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Shoes
-                    </a>
-                    <a class="navbar-item " href="#">
-                      Hats
-                    </a>
-                  </div>
+                  </p>
                 </div>
               </div>
             </div>
           </div>
-          <!-- _______________________________ -->
-        </div>
-        <div class="navbar-item">
-          <div class="field is-grouped">
-            <p class="control is-expanded">
-              <input class="input" type="text" placeholder="search something">
-            </p>
-            <p class="control">
-              <a class="button is-warning">
-                Search
-              </a>
-            </p>
-          </div>
-        </div>
-        <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="field is-grouped">
-              <p class="control">
-                <a class="button is-warning toggle-modal">
-                  <span class="icon">
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                  </span>
-                  <span class="badge1" v-bind:data-badge="cart">Cart</span>
-                </a>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <div class="columns">
-        <div class="column is-3">
-          <aside class="menu">
-            <ul class="menu-list">
-              <li><a>Sale </a></li>
-              <li>
-                <a>List Categories</a>
-                <ul>
-                  <li><a>Members</a></li>
-                  <li><a>Plugins</a></li>
-                  <li><a>Add a member</a></li>
-                </ul>
-              </li>
-              <li>
-                <a>List Items</a>
-                <ul>
-                  <li><a>Members</a></li>
-                  <li><a>Plugins</a></li>
-                  <li><a>Add a member</a></li>
-                </ul>
-              </li>
-              <li><a>Shopping Cart</a></li>
-              <li><a>Checkout</a></li>
-            </ul>
-          </aside>
-        </div>
-        <div class="column is-9">
-          <!-- HEADER -->
-          <!-- Flickity HTML init -->
-          <section class="hero is-info is-large">
-                <div class="carousel" data-flickity='{ "autoPlay": true }'>
-                  <div class="carousel-cell">
-                    <img src="https://static.pexels.com/photos/581339/pexels-photo-581339.jpeg" alt="orange tree" />
-                  </div>
-                  <div class="carousel-cell">
-                    <img src="https://static.pexels.com/photos/1702/bow-tie-businessman-fashion-man.jpg" alt="One World Trade" />
-                  </div>
-                  <div class="carousel-cell">
-                    <img src="https://static.pexels.com/photos/581087/pexels-photo-581087.jpeg" alt="drizzle" />
-                  </div>
-                  <div class="carousel-cell">
-                    <img src="https://static.pexels.com/photos/297933/pexels-photo-297933.jpeg" alt="cat nose" />
-                  </div>
-                  <div class="carousel-cell">
-                    <img src="https://static.pexels.com/photos/9379/drinking-alley-fun-bowling-9379.jpg" alt="contrail" />
-                  </div>
-                  <div class="carousel-cell">
-                    <img src="https://static.pexels.com/photos/267202/pexels-photo-267202.jpeg" alt="golden hour" />
-                  </div>
-                </div>
-          </section>
-          <!-- MAIN CONTENT
-            List Categories
-            List Item
-            Shopping Cart
-            Checkout -->
-          <section class="section">
-            <div class="container">
-              <!-- Featured Products -->
-                <h1 class="title has-text-centered">World Class Products</h1>
-                <div class="row">
-                  <!-- Product 1 -->
-
-                    <div class="wadah col-xs-8 col-sm-4 col-md-2 col-md-1 flex-item" v-for="product in products">
-                      <a>
-                        <img class="image" v-bind:src="product.picture" alt="">
-                        <hr/>
-                        <h3 class="subtitle">{{ product.products_name }}</h3>
-                        <p class="subtitle">
-                          <i class="fa fa-money" aria-hidden="true"></i> Rp {{ product.prices }}
-                        </p>
-                        <p class="title">
-                          <a v-on:click.prevent="addCart(product)" class="button is-white">
-                            <span class="icon">
-                              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                            </span>
-                            <br/>
-                            <span class="text-is-white">Add to Cart</span>
-                          </a>
-                        </p>
-                        <div class="down">
-                          <i class="fa fa-question-circle dropbtn" aria-hidden="true"></i>
-                          <div class="dropdown-details">
-                            {{ product.details }}
-                          </div>
-                        </div>
-                      </a>
+        </nav>
+    
+        <div class="columns">
+            <div class="column is-9">
+              <!-- HEADER -->
+              <!-- Flickity HTML init -->
+              <!-- <section class="hero is-info is-large">
+                    <div class="carousel" data-flickity='{ "autoPlay": true }'>
+                      <div class="carousel-cell">
+                        <img src="https://static.pexels.com/photos/581339/pexels-photo-581339.jpeg" alt="orange tree" />
+                      </div>
+                      <div class="carousel-cell">
+                        <img src="https://static.pexels.com/photos/1702/bow-tie-businessman-fashion-man.jpg" alt="One World Trade" />
+                      </div>
+                      <div class="carousel-cell">
+                        <img src="https://static.pexels.com/photos/581087/pexels-photo-581087.jpeg" alt="drizzle" />
+                      </div>
+                      <div class="carousel-cell">
+                        <img src="https://static.pexels.com/photos/297933/pexels-photo-297933.jpeg" alt="cat nose" />
+                      </div>
+                      <div class="carousel-cell">
+                        <img src="https://static.pexels.com/photos/9379/drinking-alley-fun-bowling-9379.jpg" alt="contrail" />
+                      </div>
+                      <div class="carousel-cell">
+                        <img src="https://static.pexels.com/photos/267202/pexels-photo-267202.jpeg" alt="golden hour" />
+                      </div>
                     </div>
-                <!-- /.container -->
-                <!-- MODAL -->
-                  <div class="modal" id="modal">
-                    <div class="modal-background"></div>
-                    <div class="modal-card">
-                      <header class="modal-card-head">
-                        <p class="modal-card-title">List Carts</p>
-                        <button class="delete toggle-modal"></button>
-                      </header>
-                      <section class="modal-card-body">
-
-                        <!-- v-for="transaction in transactions"  -->
-                        <div v-if="transactions.length !== 0">
-                            <table class="table">
-                              <thead>
-                                <tr>
-                                  <td>No</td>
-                                  <th>Jumlah</th>
-                                  <th>Gambar</th>
-                                  <th>Barang</th>
-                                  <th>Harga</th>
-                                  <th>Hapus</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr v-for="(transaction, i) in transactions">
-                                  <td>{{ i + 1 }}</td>
-                                  <td>{{ transaction.amount }}</td>
-                                  <td><img class="small" v-bind:src="transaction.picture" alt="product"></td>
-                                  <th>{{ transaction.products_name }}</th>
-                                  <td>{{ transaction.amount * transaction.prices }}</td>
-                                  <td><i v-on:click.prevent="removeItem(transaction._id)" class="fa fa-trash-o" aria-hidden="true"></i></td>
-                                </tr>
-                              </tbody>
-                              </table>
-                              <div class="level-right">
-                                <p class="level-item title">Total : {{ total }}</p>
+              </section> -->
+              <!-- MAIN CONTENT
+                List Categories
+                List Item
+                Shopping Cart
+                Checkout -->
+              <section class="section">
+                <div class="container">
+                  <!-- Featured Products -->
+                    <div class="row">
+                      <!-- Product 1 -->
+                        <div class="wadah col-xs-8 col-sm-4 col-md-2 col-md-1 flex-item" v-for="product in products">
+                          <a>
+                            <img class="image" v-bind:src="product.picture" alt="">
+                            <hr/>
+                            <h3 class="subtitle">{{ product.products_name }}</h3>
+                            <p class="subtitle">
+                              <i class="fa fa-money" aria-hidden="true"></i> Rp {{ product.prices }}
+                            </p>
+                            <p class="title">
+                              <a v-on:click.prevent="addCart(product)" class="button is-white">
+                                <span class="icon">
+                                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                </span>
+                                <br/>
+                                <span class="text-is-white">Add to Cart</span>
+                              </a>
+                            </p>
+                            <div class="down">
+                              <i class="fa fa-question-circle dropbtn" aria-hidden="true"></i>
+                              <div class="dropdown-details">
+                                {{ product.details }}
                               </div>
+                            </div>
+                          </a>
                         </div>
-
-                        <div v-else="transactions.length === 0">
-                          <p class="subtitle" href="">No transactions</p>
+                    <!-- /.container -->
+                    <!-- MODAL -->
+                      <div class="modal" id="modal">
+                        <div class="modal-background"></div>
+                        <div class="modal-card">
+                          <header class="modal-card-head">
+                            <p class="modal-card-title">List Carts</p>
+                            <button class="delete toggle-modal"></button>
+                          </header>
+                          <section class="modal-card-body">
+    
+                            <!-- v-for="transaction in transactions"  -->
+                            <div v-if="transactions.length !== 0">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <td>No</td>
+                                      <th>Jumlah</th>
+                                      <th>Gambar</th>
+                                      <th>Barang</th>
+                                      <th>Harga</th>
+                                      <th>Hapus</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr v-for="(transaction, i) in transactions">
+                                      <td>{{ i + 1 }}</td>
+                                      <td>{{ transaction.amount }}</td>
+                                      <td><img class="small" v-bind:src="transaction.picture" alt="product"></td>
+                                      <th>{{ transaction.products_name }}</th>
+                                      <td>{{ transaction.amount * transaction.prices }}</td>
+                                      <td><i v-on:click.prevent="removeItem(transaction._id)" class="fa fa-trash-o" aria-hidden="true"></i></td>
+                                    </tr>
+                                  </tbody>
+                                  </table>
+                                  <div class="level-right">
+                                    <p class="level-item title">Total : {{ total }}</p>
+                                  </div>
+                            </div>
+    
+                            <div v-else="transactions.length === 0">
+                              <p class="subtitle" href="">No transactions</p>
+                            </div>
+                            <!-- Content ... -->
+    
+                          </section>
+                          <footer class="modal-card-foot">
+                            <a v-if="transactions.length !== 0" v-on:click="makePayment" class="toggle-modal button is-warning ">Payment</a>
+                            <a class="button toggle-modal">Cancel</a>
+                          </footer>
                         </div>
-                        <!-- Content ... -->
-
-                      </section>
-                      <footer class="modal-card-foot">
-                        <a v-if="transactions.length !== 0" v-on:click="makePayment" class="toggle-modal button is-warning ">Payment</a>
-                        <a class="button toggle-modal">Cancel</a>
-                      </footer>
-                    </div>
+                      </div>
+                    <!-- MODAL -->
                   </div>
-                <!-- MODAL -->
+                </div>
+              </section>
               </div>
-            </div>
-          </section>
           </div>
-      </div>
-        <!-- FOOTER -->
-        <footer class="footer">
-          <div class="container">
-            <div class="content has-text-centered">
-              <p>
-                <strong>BoostBulma Custom</strong> by SmartShop.
-              </p>
-            </div>
-          </div>
-        </footer>
-
-    </div>
+            <!-- FOOTER -->
+            <footer class="footer">
+              <div class="container">
+                <div class="content has-text-centered">
+                  <p>
+                    <strong>BoostBulma Custom</strong> by SmartShop.
+                  </p>
+                </div>
+              </div>
+            </footer>
+    
+        </div>
     <script type="text/javascript">
       new Vue(
       {
@@ -406,7 +382,8 @@
               ObjId.push(transaction._id)
             })
             console.log('INI TRANSAKSI ID', ObjId);
-            axios.post('http://api.smartshopp.ga/transactions',{
+            // axios.post('http://api.smartshopp.ga/transactions',{
+              axios.post('http://localhost:3000/transactions',{
               id: ObjId,
               total: this.total
             })
@@ -458,7 +435,8 @@
           }
         },
         created(){
-          axios.get('http://api.smartshopp.ga/products')
+          // axios.get('http://api.smartshopp.ga/products')
+          axios.get('http://localhost:3000/products')
           .then(dataProducts => {
             this.products.push(...dataProducts.data)
           })

@@ -8,13 +8,118 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/bulma.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/bootstrap.css" type="text/css">
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-
+    <style>
+      .modal-mask {
+        position: fixed;
+        z-index: 9998;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+        display: table;
+        transition: opacity .3s ease;
+      }
+      
+      .modal-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+      }
+      
+      .modal-container {
+        width: 400px;
+        margin: 0px auto;
+        padding: 20px 30px;
+        border-radius: 2px;
+        background-color: rgba(0, 0, 0, .23);
+        transition: all .3s ease;
+      }
+      
+      .modal-header h3 {
+        margin-top: 0;
+        color: #42b983;
+      }
+      
+      .modal-body {
+        margin: 20px 0;
+      }
+      .modal-enter {
+        opacity: 0;
+      }
+      
+      .modal-leave-active {
+        opacity: 0;
+      }
+      
+      .modal-enter .modal-container,
+      .modal-leave-active .modal-container {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+      }
+      
+        /* LOGIN */
+  
+      * { 
+        -webkit-font-smoothing: antialiased; 
+        text-rendering: optimizeLegibility; 
+      } 
+      /* .login-form { width: 100%; padding: 2em; position: relative; background: rgba(0, 0, 0, 0.15); }  */
+      .login-form:before { 
+        content: ''; position: absolute; top: -2px; left: 0; height: 2px; width: 100%; 
+        background: linear-gradient(to right, #35c3c1, #00d6b7); 
+      } 
+      .flex-row { display: flex; margin-bottom: 1em; 
+      } 
+      .lf--label { 
+        width: 2em; display: flex; align-items: center; 
+        justify-content: center; background: #f5f6f8; cursor: pointer; 
+      } 
+      .lf--input { flex: 1; padding: 1em; border: 0; color: #8f8f8f; font-size: 1rem; } 
+      .lf--input:focus { outline: none; transition: transform .15s ease; transform: scale(1.1); } 
+      .lf--submit { display: block; padding: 1em; width: 100%; 
+          background: linear-gradient(to right, #f6b75d, #f2c27d); border: 0; color: #fff; 
+          cursor: pointer; font-size: .75em; font-weight: 600; text-shadow: 0 1px 0 rgba(0, 0, 0, 0.2); } 
+      .lf--submit:focus { outline: none; transition: transform .15s ease; transform: scale(1.1); } 
+  
+    </style>
   </head>
   <body>
+    <script type="text/x-template" id="modal-template">
+      <transition name="modal">
+        <div class="modal-mask">
+          <div class="modal-wrapper">
+            <div class="modal-container">
+              <form class='login-form' @submit='checkLogin'>
+                <div class="flex-row">
+                  <label class="lf--label" for="username">
+                    <svg x="0px" y="0px" width="12px" height="13px">
+                      <path fill="#B1B7C4" d="M8.9,7.2C9,6.9,9,6.7,9,6.5v-4C9,1.1,7.9,0,6.5,0h-1C4.1,0,3,1.1,3,2.5v4c0,0.2,0,0.4,0.1,0.7 C1.3,7.8,0,9.5,0,11.5V13h12v-1.5C12,9.5,10.7,7.8,8.9,7.2z M4,2.5C4,1.7,4.7,1,5.5,1h1C7.3,1,8,1.7,8,2.5v4c0,0.2,0,0.4-0.1,0.6 l0.1,0L7.9,7.3C7.6,7.8,7.1,8.2,6.5,8.2h-1c-0.6,0-1.1-0.4-1.4-0.9L4.1,7.1l0.1,0C4,6.9,4,6.7,4,6.5V2.5z M11,12H1v-0.5 c0-1.6,1-2.9,2.4-3.4c0.5,0.7,1.2,1.1,2.1,1.1h1c0.8,0,1.6-0.4,2.1-1.1C10,8.5,11,9.9,11,11.5V12z"/>
+                    </svg>
+                  </label>
+                  <input v-model="username" class='lf--input' placeholder='Username' type='text'>
+                </div>
+                <div class="flex-row">
+                  <label class="lf--label" for="password">
+                    <svg x="0px" y="0px" width="15px" height="5px">
+                      <g>
+                        <path fill="#B1B7C4" d="M6,2L6,2c0-1.1-1-2-2.1-2H2.1C1,0,0,0.9,0,2.1v0.8C0,4.1,1,5,2.1,5h1.7C5,5,6,4.1,6,2.9V3h5v1h1V3h1v2h1V3h1 V2H6z M5.1,2.9c0,0.7-0.6,1.2-1.3,1.2H2.1c-0.7,0-1.3-0.6-1.3-1.2V2.1c0-0.7,0.6-1.2,1.3-1.2h1.7c0.7,0,1.3,0.6,1.3,1.2V2.9z"/>
+                      </g>
+                    </svg>
+                  </label>
+                  <input v-model="password" class='lf--input' placeholder='Password' type='password'>
+                </div>
+                <input class='lf--submit' type='submit' value='LOGIN'>
+              </form>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </script>
     <div id="products">
+        <login-page v-if="showModal" @close="showModal = false"/>
       <div class="tile is-ancestor">
         <div class="tile is-vertical is-7">
           <div class="tile is-parent">
@@ -48,12 +153,28 @@
             </article>
           </div>
         </div>
-        <input-product/>
+        <input-product @loginAdmin="loginadmin"/>
       </div>
     </div>
-
     <!-- ================================== -->
     <script>
+      Vue.component('login-page', {
+        template: '#modal-template',
+        data () {
+          return {
+            username: '',
+            password: ''
+          }
+        },
+        methods: {
+          checkLogin () {
+            this.$emit('loginAdmin', {
+              username: this.username,
+              password: this.password
+            })
+          }
+        }
+      })
       Vue.component('input-product',
       {
         template : `
@@ -102,14 +223,22 @@
       {
         el: '#products',
         data: {
-          products : []
+          products : [],
+          showModal: false
         },
         methods: {
-          saveProduct() {
+          saveProduct () {
             console.log('MASUK SINI', this.form.products_name);
+          },
+          loginadmin (data) {
+            console.log(data)
           }
         },
-        created(){
+        created (){
+          let session = localStorage.getItem('token')
+          if(!session) {
+            this.showModal = true
+          }
           axios.get('http://localhost:3000/products')
           .then(response => {
             console.log(response.data);
