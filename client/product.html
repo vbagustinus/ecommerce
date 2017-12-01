@@ -15,59 +15,109 @@
   </head>
   <body>
     <div id="products">
-      <section class="hero is-medium is-primary is-bold">
-        <div class="hero-body">
-          <div class="container">
-            <form v-on:submit.prevent="saveProduct" id="uploadForm" enctype="multipart/form-data" >
+      <div class="tile is-ancestor">
+        <div class="tile is-vertical is-7">
+          <div class="tile is-parent">
+            <article class="tile is-child notification is-info">
+                <!-- Content -->
+                <div class="wadah col-xs-8 col-sm-4 col-md-2 col-md-1 flex-item" v-for="product in products">
+                  <a>
+                    <img class="image" v-bind:src="product.picture" alt="">
+                    <hr/>
+                    <h3 class="subtitle">{{ product.products_name }}</h3>
+                    <p class="subtitle">
+                      <i class="fa fa-money" aria-hidden="true"></i> Rp {{ product.prices }}
+                    </p>
+                    <p class="title">
+                      <a v-on:click.prevent="addCart(product)" class="button is-white">
+                        <span class="icon">
+                          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                        </span>
+                        <br/>
+                        <span class="text-is-white">Add to Cart</span>
+                      </a>
+                    </p>
+                    <div class="down">
+                      <i class="fa fa-question-circle dropbtn" aria-hidden="true"></i>
+                      <div class="dropdown-details">
+                        {{ product.details }}
+                      </div>
+                    </div>
+                  </a>
+                </div>
+            </article>
+          </div>
+        </div>
+        <input-product/>
+      </div>
+    </div>
+
+    <!-- ================================== -->
+    <script>
+      Vue.component('input-product',
+      {
+        template : `
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-light">
+            <form @submit.prevent="saveProduct" id="products">
               <div class="field is-horizontal">
                 <div class="field-body">
                   <div class="field">
                     <div class="control">
-                      <input class="input" type='text' v-model="products_name" name='products_name' placeholder="Products Name"><br><br>
                       <div class="field">
-                        <div class="file is-warning">
-                          <label class="file-label">
-                            <input class="file-input" type="file" name="image">
-                            <span class="file-cta">
-                              <span class="file-icon">
-                                <i class="fa fa-upload"></i>
-                              </span>
-                              <span class="file-label">
-                                Choose Image
-                              </span>
-                            </span>
-                          </label>
-                        </div><br><br>
-                            <textarea type='text' v-model="details" name='details' class="textarea" placeholder="Explain products"></textarea><br>
-                            <input class="input" type='text' v-model="category" name='category' placeholder="Category Name"/><br><br>
-                            <input class="input" type='text' v-model="prices" name='prices' placeholder="Prices"/><br><br>
-                            <input class="input" type='text' v-model="stocks" name='stocks'placeholder="Stocks"/><br><br>
-                            <input class="button is-warning" type="submit" value="Upload Product" name="submit"/>
+                        <input class="input" type='text' v-model="form.products_name" name='products_name' placeholder="Products Name"><br><br>
+                        <textarea type='text' v-model="form.details" name='details' class="textarea" placeholder="Explain products"></textarea><br>
+                        <input class="input" type='text' v-model="form.category" name='category' placeholder="Category Name"/><br><br>
+                        <input class="input" type='text' v-model="form.prices" name='prices' placeholder="Prices"/><br><br>
+                        <input class="input" type='text' v-model="form.stocks" name='stocks'placeholder="Stocks"/><br><br>
+                        <input class="button is-warning" type="submit" value="Upload Product" name="submit"/>
                       </div>
                     </div>
                   </div>
                 </div>
-              <span id = "status"></span>
+              </div>
             </form>
-          </div>
+          </article>
         </div>
-      </section>
-    </div>
-    <script>
+        `,
+        data(){
+          return {
+            form : {
+              products_name: '',
+              details: '',
+              category: '',
+              prices: 0,
+              stocks: 0
+            }
+          }
+        },
+        methods : {
+          saveProduct(){
+            console.log();
+          }
+        },
+
+      })
       new Vue(
       {
         el: '#products',
         data: {
-          products_name: '',
-          details: '',
-          category: '',
-          prices: 0,
-          stocks: 0
+          products : []
         },
         methods: {
-          saveProduct(data) {
-            console.log('MASUK SINI', data);
+          saveProduct() {
+            console.log('MASUK SINI', this.form.products_name);
           }
+        },
+        created(){
+          axios.get('http://localhost:3000/products')
+          .then(response => {
+            console.log(response.data);
+            this.products.push(...response.data)
+          })
+          .catch(err => {
+            console.log(err);
+          })
         }
       })
     </script>

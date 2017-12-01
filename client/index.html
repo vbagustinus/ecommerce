@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="google-site-verification" content="qlIHK9zdW6gYT8NE0GCD3D_7M-NSbv0ofpO16ht9Xhg" />
     <title>SmartShop</title>
     <link href="https://fonts.googleapis.com/css?family=Muli|Quicksand|Raleway" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/bulma.css" type="text/css">
     <link rel="stylesheet" href="/assets/css/bootstrap.css" type="text/css">
-
     <script src="/assets/js/flicky.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
@@ -379,7 +379,7 @@
           <div class="container">
             <div class="content has-text-centered">
               <p>
-                <strong>Template using Bulma Custom</strong> by SmartShop.
+                <strong>BoostBulma Custom</strong> by SmartShop.
               </p>
             </div>
           </div>
@@ -406,11 +406,13 @@
               ObjId.push(transaction._id)
             })
             console.log('INI TRANSAKSI ID', ObjId);
-            axios.post('http://localhost:3000/transactions',{
+            axios.post('http://api.smartshopp.ga/transactions',{
               id: ObjId,
               total: this.total
             })
             .then(response => {
+              this.transactions = []
+              this.cart = 0
               console.log('SUKSES nggGA YA',response);
             })
             .catch(err => {
@@ -456,7 +458,7 @@
           }
         },
         created(){
-          axios.get('http://localhost:3000/products')
+          axios.get('http://api.smartshopp.ga/products')
           .then(dataProducts => {
             this.products.push(...dataProducts.data)
           })
