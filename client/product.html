@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <title>Input Products</title>
@@ -12,7 +11,6 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 </head>
-
 <body>
   <script type="text/x-template" id="modal-template">
     <transition name="modal">
@@ -62,7 +60,6 @@
           <span></span>
         </div>
       </div>
-
       <div v-if="name" id="navbarExampleTransparentExample" class="navbar-menu">
         <div class="navbar-end">
           <div class="navbar-item">
@@ -234,15 +231,19 @@
           data.append('prices', this.form.prices);
           data.append('stocks', this.form.stocks);
           axios.post('http://api.smartshopp.ga/products', data)
-            .then((data) => {
-              console.log('setalah save product', data)
-            })
-            .catch(err => {
-              console.log('APA KENA ERROR')
-              console.log(err)
-            })
-          // console.log('DI EMIT', data)
-          // this.$emit('savedata', data)
+          .then((data) => {
+            console.log('setalah save product', data)
+            this.image = '';
+            this.form.products_name = '';
+            this.form.details = '';
+            this.form.category = '';
+            this.form.prices = '';
+            this.form.stocks = '';
+          })
+          .catch(err => {
+            console.log('APA KENA ERROR')
+            console.log(err)
+          })
         }
       },
     })
@@ -261,13 +262,13 @@
         },
         deleteImages(id) {
           axios.delete(`http://api.smartshopp.ga/products/${id}`)
-            .then(res => {
-              console.log('HASIL HAPUS', res);
-              location.reload();
-            })
-            .catch(err => {
-              console.log(err);
-            })
+          .then(res => {
+            console.log('HASIL HAPUS', res);
+            location.reload();
+          })
+          .catch(err => {
+            console.log(err);
+          })
         },
         productsave(data) {
           let session = localStorage.getItem('token')
@@ -277,14 +278,15 @@
           }
           console.log('kesini ga', data)
           axios.post('http://api.smartshopp.ga/products', data)
-            .then((data) => {
-              console.log('setalah save product', data)
-              location.reload();
-            })
-            .catch(err => {
-              console.log('APA KENA ERROR')
-              console.log(err)
-            })
+          .then((data) => {
+            console.log('setalah save product', data)
+
+            location.reload();
+          })
+          .catch(err => {
+            console.log('APA KENA ERROR')
+            console.log(err)
+          })
         },
         loginadmin(data) {
           axios.post('http://api.smartshopp.ga/login', data)
@@ -292,12 +294,14 @@
               data
             }) => {
               console.log('setalah login', data)
-              localStorage.setItem('token', data.token)
-              localStorage.setItem('name', data.name)
-              alert(data.msg)
-              this.showModal = false
-              this.status = false
-              this.name = localStorage.getItem('name')
+              if(data.token) {
+                localStorage.setItem('token', data.token)
+                localStorage.setItem('name', data.name)
+                alert(data.msg)
+                this.showModal = false
+                this.status = false
+                this.name = localStorage.getItem('name')
+              }
             })
             .catch(err => {
               console.log(err)
@@ -312,13 +316,13 @@
         }
         this.name = localStorage.getItem('name')
         axios.get('http://api.smartshopp.ga/products')
-          .then(response => {
-            console.log(response.data);
-            this.products.push(...response.data)
-          })
-          .catch(err => {
-            console.log(err);
-          })
+        .then(response => {
+          console.log(response.data);
+          this.products.push(...response.data)
+        })
+        .catch(err => {
+          console.log(err);
+        })
       }
     })
   </script>

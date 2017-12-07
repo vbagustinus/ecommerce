@@ -27,3 +27,8 @@ for CLIENT
 $ cd client
 $ live-server (using npm for installing liver-server global )
 ```
+link : 
+
+http://www.smartshopp.ga (user)
+
+http://www.smartshopp.ga/product.html (upload & admin) username = admin || password = admin
