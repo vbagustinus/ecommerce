@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <meta name="google-site-verification" content="qlIHK9zdW6gYT8NE0GCD3D_7M-NSbv0ofpO16ht9Xhg" />
+    <title>SmartShop</title>
+    <link href="https://fonts.googleapis.com/css?family=Muli|Quicksand|Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/bulma.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/bootstrap.css" type="text/css">
+    <script src="assets/js/flicky.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function () {
+        // Get all "navbar-burger" elements
+        var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+
+          // Add a click event on each of them
+          $navbarBurgers.forEach(function ($el) {
+            $el.addEventListener('click', function () {
+              // Get the target from the "data-target" attribute
+              var target = $el.dataset.target;
+              var $target = document.getElementById(target);
+
+              // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+              $el.classList.toggle('is-active');
+              $target.classList.toggle('is-active');
+
+            });
+          });
+        }
+      });
+    </script>
+    <style media="screen">
+      .small {
+        width: 100px;
+      }
+      .columns {
+        padding: 30px;
+      }
+    </style>
+  </head>
+  <body>
+      <div id="ecommerce">
+          
+        <div class="columns">
+            <div class="column is-9">
+              <!-- HEADER -->
+              <!-- Flickity HTML init -->
+              <section class="hero is-info is-large">
+                    <div class="carousel" data-flickity='{ "autoPlay": true }'>
+                      <div class="carousel-cell">
+                        <img src="https://static.pexels.com/photos/581339/pexels-photo-581339.jpeg" alt="orange tree" />
+                      </div>
+                      <div class="carousel-cell">
+                        <img src="https://static.pexels.com/photos/1702/bow-tie-businessman-fashion-man.jpg" alt="One World Trade" />
+                      </div>
+                      <div class="carousel-cell">
+                        <img src="https://static.pexels.com/photos/581087/pexels-photo-581087.jpeg" alt="drizzle" />
+                      </div>
+                      <div class="carousel-cell">
+                        <img src="https://static.pexels.com/photos/297933/pexels-photo-297933.jpeg" alt="cat nose" />
+                      </div>
+                      <div class="carousel-cell">
+                        <img src="https://static.pexels.com/photos/9379/drinking-alley-fun-bowling-9379.jpg" alt="contrail" />
+                      </div>
+                      <div class="carousel-cell">
+                        <img src="https://static.pexels.com/photos/267202/pexels-photo-267202.jpeg" alt="golden hour" />
+                      </div>
+                    </div>
+              </section>
+              <!-- MAIN CONTENT
+                List Categories
+                List Item
+                Shopping Cart
+                Checkout -->
+              <section class="section">
+                <div class="container">
+                  <!-- Featured Products -->
+                    <div class="row">
+                      <!-- Product 1 -->
+                        <div class="wadah col-xs-8 col-sm-4 col-md-2 col-md-1 flex-item" v-for="product in products">
+                          <a>
+                            <img class="image" v-bind:src="product.picture" alt="">
+                            <hr/>
+                            <h3 class="subtitle">{{ product.products_name }}</h3>
+                            <p class="subtitle">
+                              <i class="fa fa-money" aria-hidden="true"></i> Rp {{ product.prices }}
+                            </p>
+                            <p class="title">
+                              <a v-on:click.prevent="addCart(product)" class="button is-white">
+                                <span class="icon">
+                                  <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+                                </span>
+                                <br/>
+                                <span class="text-is-white">Add to Cart</span>
+                              </a>
+                            </p>
+                            <div class="down">
+                              <i class="fa fa-question-circle dropbtn" aria-hidden="true"></i>
+                              <div class="dropdown-details">
+                                {{ product.details }}
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                    <!-- /.container -->
+                    <!-- MODAL -->
+                      <div class="modal" id="modal">
+                        <div class="modal-background"></div>
+                        <div class="modal-card">
+                          <header class="modal-card-head">
+                            <p class="modal-card-title">List Carts</p>
+                            <button class="delete toggle-modal"></button>
+                          </header>
+                          <section class="modal-card-body">
+    
+                            <!-- v-for="transaction in transactions"  -->
+                            <div v-if="transactions.length !== 0">
+                                <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <td>No</td>
+                                      <th>Jumlah</th>
+                                      <th>Gambar</th>
+                                      <th>Barang</th>
+                                      <th>Harga</th>
+                                      <th>Hapus</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr v-for="(transaction, i) in transactions">
+                                      <td>{{ i + 1 }}</td>
+                                      <td>{{ transaction.amount }}</td>
+                                      <td><img class="small" v-bind:src="transaction.picture" alt="product"></td>
+                                      <th>{{ transaction.products_name }}</th>
+                                      <td>{{ transaction.amount * transaction.prices }}</td>
+                                      <td><i v-on:click.prevent="removeItem(transaction._id)" class="fa fa-trash-o" aria-hidden="true"></i></td>
+                                    </tr>
+                                  </tbody>
+                                  </table>
+                                  <div class="level-right">
+                                    <p class="level-item title">Total : {{ total }}</p>
+                                  </div>
+                            </div>
+    
+                            <div v-else="transactions.length === 0">
+                              <p class="subtitle" href="">No transactions</p>
+                            </div>
+                            <!-- Content ... -->
+    
+                          </section>
+                          <footer class="modal-card-foot">
+                            <a v-if="transactions.length !== 0" v-on:click="makePayment" class="toggle-modal button is-warning ">Payment</a>
+                            <a class="button toggle-modal">Cancel</a>
+                          </footer>
+                        </div>
+                      </div>
+                    <!-- MODAL -->
+                  </div>
+                </div>
+              </section>
+              </div>
+          </div>
+            <!-- FOOTER -->
+            <footer class="footer">
+              <div class="container">
+                <div class="content has-text-centered">
+                  <p>
+                    <strong>BoostBulma Custom</strong> by SmartShop.
+                  </p>
+                </div>
+              </div>
+            </footer>
+        </div>
+    <script type="text/javascript">
+      new Vue(
+      {
+        el: '#ecommerce',
+        data: {
+          products: [],
+          cart: 0,
+          total: 0,
+          transactions: []
+        },
+        methods: {
+          makePayment(){
+            // $('modal').classList.toggle('is-active');
+            toggleClass()
+            // console.log('INI PAYMENT',this.transactions);
+            let ObjId = []
+            this.transactions.map(transaction => {
+              ObjId.push(transaction._id)
+            })
+            console.log('INI TRANSAKSI ID', ObjId);
+            // axios.post('http://api.smartshopp.ga/transactions',{
+              axios.post('http://api.smartshopp.ga/transactions',{
+              id: ObjId,
+              total: this.total
+            })
+            .then(response => {
+              this.transactions = []
+              this.cart = 0
+              console.log('SUKSES nggGA YA',response);
+            })
+            .catch(err => {
+              console.log(err);
+            })
+          },
+          addCart(product) {
+            // console.log('KWESINI');
+            this.cart += 1
+            // console.log('INI PRODUCT',product);
+            console.log(product._id);
+            // this.transactions.push(product)
+            if(this.transactions == 0){
+              product.amount = 1;
+              this.total += product.prices
+              this.transactions.push(product)
+            } else {
+              this.transactions.forEach(trans => {
+                // console.log(trans._id !== product._id );
+                if(trans._id !== product._id ){
+                  if (!product.amount) {
+                    product.amount = 1;
+                    this.total += product.prices
+                    this.transactions.push(product)
+                  }
+                  // product.amount = 1;
+                }
+                if(trans._id === product._id ) {
+                  trans.amount++
+                  this.total += product.prices
+                }
+              })
+            }
+          },
+          removeItem(id){
+            this.transactions.map((trans, i) => {
+              if(trans._id == id){
+                this.transactions.splice(i, 1);
+                this.total -= trans.prices * trans.amount
+                this.cart -= trans.amount
+              }
+            })
+          }
+        },
+        created(){
+          // axios.get('http://api.smartshopp.ga/products')
+          axios.get('http://api.smartshopp.ga/products')
+          .then(dataProducts => {
+            this.products.push(...dataProducts.data)
+          })
+          .catch(err => {
+            console.log(err);
+          })
+        }
+      })
+    </script>
+    <script>
+      var modal = document.getElementById('modal');
+      var elements = document.getElementsByClassName('toggle-modal');
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].addEventListener('click', toggleClass);
+      }
+
+      function toggleClass() {
+        modal.classList.toggle('is-active');
+      }
+    </script>
+    <script>
+      $(document).ready(function(){
+          $('[data-toggle="popover"]').popover();
+      });
+    </script>
+  </body>
+</html>
